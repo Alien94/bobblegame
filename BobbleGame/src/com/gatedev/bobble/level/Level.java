@@ -60,12 +60,9 @@ public class Level {
         return nearBubbles;
     }
 
-    public void addBubble(float x, float y, int row, int col, TextureRegion img, GameScreen.color color) {
+    public void addBubble(float x, float y, int row, int col, TextureRegion img) {
         Bubble bubble = new Bubble(x, y, img);
         bubble.positionSetted = true;
-        bubble.color = color;
-        bubble.row = row;
-        bubble.col = col;
         bubbles[row][col] = bubble;
         entities.add(bubble);
     }
@@ -80,19 +77,19 @@ public class Level {
                 x = xCols[i];
                 y = 750-yRows[j];
                 if(color.equals("ffff00ff")) {
-                    addBubble(x, y, j, i, Assets.yellowBubble, GameScreen.color.YELLOW);
+                    addBubble(x, y, j, i, Assets.yellowBubble);
                     System.out.println("Added yellow bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
                 }
                 else if(color.equals("ff0000ff")) {
-                    addBubble(x, y, j, i, Assets.redBubble, GameScreen.color.RED);
+                    addBubble(x, y, j, i, Assets.redBubble);
                     System.out.println("Added red bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
                 }
                 else if(color.equals("ff00ff")) {
-                    addBubble(x, y, j, i, Assets.greenBubble, GameScreen.color.GREEN);
+                    addBubble(x, y, j, i, Assets.greenBubble);
                     System.out.println("Added green bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
                 }
                 else if(color.equals("ffff")) {
-                    addBubble(x, y, j, i, Assets.blueBubble, GameScreen.color.BLUE);
+                    addBubble(x, y, j, i, Assets.blueBubble);
                     System.out.println("Added blue bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
                 }
                 else System.out.println("Row:"+j+"  col:"+i+"   "+color);

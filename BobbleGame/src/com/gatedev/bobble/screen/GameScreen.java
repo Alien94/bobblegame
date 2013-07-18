@@ -26,8 +26,6 @@ public class GameScreen implements Screen {
     public Keyboard keyboard = new Keyboard();
     public static Random random;
 
-    public static enum color {RED, YELLOW, BLUE, GREEN};
-
     public static boolean pause = false;
 
     public int curFps;
