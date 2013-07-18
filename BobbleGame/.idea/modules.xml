@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BobbleGame.iml" filepath="$PROJECT_DIR$/BobbleGame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../BobbleGame-android/BobbleGame-android.iml" filepath="$PROJECT_DIR$/../BobbleGame-android/BobbleGame-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../BobbleGame-desktop/BobbleGame-desktop.iml" filepath="$PROJECT_DIR$/../BobbleGame-desktop/BobbleGame-desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../BobbleGame-html/BobbleGame-html.iml" filepath="$PROJECT_DIR$/../BobbleGame-html/BobbleGame-html.iml" />
+    </modules>
+  </component>
+</project>
+
