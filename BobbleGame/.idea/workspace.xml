@@ -7,20 +7,20 @@
     <list default="true" id="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" name="Default" comment="" />
     <ignored path="BobbleGame.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/fragment.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374080310905" ignored="false" />
+    <file path="/fragment.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374158798016" ignored="false" />
     <file path="/BobbleGame.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1373896182470" ignored="false" />
-    <file path="/GameScreen.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374143099473" ignored="false" />
+    <file path="/GameScreen.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374162668490" ignored="false" />
     <file path="/Renderer.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374055493657" ignored="false" />
     <file path="/Assets.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374141906079" ignored="false" />
     <file path="/KeyboardHandler.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374075084182" ignored="false" />
     <file path="/Keyboard.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1373896374317" ignored="false" />
-    <file path="/Bubble.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374142051531" ignored="false" />
-    <file path="/Level.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374142491803" ignored="false" />
-    <file path="/Entity.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374143629096" ignored="false" />
+    <file path="/Bubble.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374162769339" ignored="false" />
+    <file path="/Level.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374165427767" ignored="false" />
+    <file path="/Entity.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374166426215" ignored="false" />
     <file path="/Controls.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1373902152850" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1373899364146" ignored="false" />
     <file path="/strings.xml" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1373899657228" ignored="false" />
-    <file path="/Arrow.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374143211891" ignored="false" />
+    <file path="/Arrow.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1374162751605" ignored="false" />
     <file path="/OverlapTester.java" changelist="66c27998-fe6c-4f5e-9dae-ad8d5fa8a28e" time="1373908175871" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +85,7 @@
       <file leaf-file-name="GameScreen.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/screen/GameScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="41" selection-start="1375" selection-end="1375" vertical-scroll-proportion="0.0">
+            <state line="28" column="18" selection-start="710" selection-end="710" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -112,8 +112,10 @@
       <file leaf-file-name="Entity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/entity/Entity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="151" column="69" selection-start="5429" selection-end="5429" vertical-scroll-proportion="0.6002291">
-              <folding />
+            <state line="180" column="46" selection-start="6603" selection-end="6603" vertical-scroll-proportion="0.4284078">
+              <folding>
+                <element signature="e#638#646#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,7 +132,7 @@
       <file leaf-file-name="Arrow.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/entity/Arrow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="47" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.0">
+            <state line="53" column="88" selection-start="1961" selection-end="1961" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -139,7 +141,7 @@
       <file leaf-file-name="Level.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/level/Level.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="31" selection-start="3020" selection-end="3020" vertical-scroll-proportion="0.0">
+            <state line="70" column="76" selection-start="2055" selection-end="2055" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -148,7 +150,7 @@
       <file leaf-file-name="Bubble.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/entity/Bubble.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="23" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0">
+            <state line="31" column="27" selection-start="800" selection-end="800" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -175,10 +177,10 @@
         <option value="$PROJECT_DIR$/src/com/gatedev/bobble/Renderer.java" />
         <option value="$PROJECT_DIR$/src/com/gatedev/bobble/input/KeyboardHandler.java" />
         <option value="$PROJECT_DIR$/src/com/gatedev/bobble/Assets.java" />
-        <option value="$PROJECT_DIR$/src/com/gatedev/bobble/entity/Bubble.java" />
-        <option value="$PROJECT_DIR$/src/com/gatedev/bobble/level/Level.java" />
         <option value="$PROJECT_DIR$/src/com/gatedev/bobble/screen/GameScreen.java" />
         <option value="$PROJECT_DIR$/src/com/gatedev/bobble/entity/Arrow.java" />
+        <option value="$PROJECT_DIR$/src/com/gatedev/bobble/entity/Bubble.java" />
+        <option value="$PROJECT_DIR$/src/com/gatedev/bobble/level/Level.java" />
         <option value="$PROJECT_DIR$/src/com/gatedev/bobble/entity/Entity.java" />
       </list>
     </option>
@@ -241,6 +243,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -591,12 +594,11 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -608,12 +610,12 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -643,6 +645,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -668,19 +683,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -809,8 +811,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -825,8 +827,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18943436" sideWeight="0.67074525" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18943436" sideWeight="0.67074525" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852387" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -969,38 +971,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/level/Level.java">
+    <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/screen/GameScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="31" selection-start="3020" selection-end="3020" vertical-scroll-proportion="0.0">
+        <state line="28" column="18" selection-start="710" selection-end="710" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/entity/Bubble.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="23" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/screen/GameScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="41" selection-start="1375" selection-end="1375" vertical-scroll-proportion="0.0">
+        <state line="31" column="27" selection-start="800" selection-end="800" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/entity/Arrow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="47" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.0">
+        <state line="53" column="88" selection-start="1961" selection-end="1961" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/level/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="76" selection-start="2055" selection-end="2055" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/gatedev/bobble/entity/Entity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="69" selection-start="5429" selection-end="5429" vertical-scroll-proportion="0.6002291">
-          <folding />
+        <state line="180" column="46" selection-start="6603" selection-end="6603" vertical-scroll-proportion="0.4284078">
+          <folding>
+            <element signature="e#638#646#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1056,12 +1060,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>BobbleGame-android</last-edited>
+          <last-edited>BobbleGame</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

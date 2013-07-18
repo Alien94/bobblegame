@@ -1,8 +1,10 @@
 package com.gatedev.bobble.entity;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.gatedev.bobble.Assets;
+import com.gatedev.bobble.screen.GameScreen;
 
 /**
  * User: Gianluca
@@ -13,12 +15,21 @@ public class Bubble extends Entity {
 
     public int row, col;
     public TextureRegion img;
+    public GameScreen.color color;
 
     public Bubble(float x, float y, TextureRegion img) {
         super(x, y);
         this.width = 64;
         this.height = 64;
         this.img = img;
+    }
+
+    public Bubble(float x, float y, TextureRegion img, GameScreen.color color) {
+        super(x, y);
+        this.width = 64;
+        this.height = 64;
+        this.img = img;
+        this.color = color;
     }
 
     @Override

@@ -49,10 +49,10 @@ public class Arrow extends Entity {
 
     private void createNextBubble() {
         int nextColor = GameScreen.random.nextInt(4);
-        if(nextColor==0) next = new Bubble(x+28, y, Assets.yellowBubble);
-        else if(nextColor==1) next = new Bubble(x+28, y, Assets.blueBubble);
-        else if(nextColor==2) next = new Bubble(x+28, y, Assets.redBubble);
-        else if(nextColor==3) next = new Bubble(x+28, y, Assets.greenBubble);
+        if(nextColor==0) next = new Bubble(x+28, y, Assets.yellowBubble, GameScreen.color.YELLOW);
+        else if(nextColor==1) next = new Bubble(x+28, y, Assets.blueBubble, GameScreen.color.BLUE);
+        else if(nextColor==2) next = new Bubble(x+28, y, Assets.redBubble, GameScreen.color.RED);
+        else if(nextColor==3) next = new Bubble(x+28, y, Assets.greenBubble, GameScreen.color.GREEN);
     }
 
     public void setDegrees(int angle) {
