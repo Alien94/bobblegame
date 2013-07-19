@@ -71,7 +71,7 @@ public abstract class Entity {
             ((Bubble)this).row = row;
             ((Bubble)this).col = col;
             level.bubbles[row][col] =  (Bubble)this;
-            System.out.println("AFTER be at row:"+row+"  col:"+col+"   x:"+tempX+"   y:"+tempY);
+            //System.out.println("AFTER be at row:"+row+"  col:"+col+"   x:"+tempX+"   y:"+tempY);
             positionSetted = true;
             level.arrow.nextShoot = 0;
 
@@ -79,7 +79,7 @@ public abstract class Entity {
             level.bubbleCount = 0;
 
             ArrayList<Bubble> around = giveAround(level, row, col);
-            System.out.println("Around to row:"+row+"  col:"+col+": "+around.size());
+            //System.out.println("Around to row:"+row+"  col:"+col+": "+around.size());
             addToCheckedList(level, (Bubble) this);
             level.bubbleCount++;
             //System.out.println("ADDED TO LIST row:"+row+"  col:"+col);
@@ -87,15 +87,15 @@ public abstract class Entity {
                 //System.out.println("Main explode");
                 be.exp(level, false);
             }
-            System.out.println("Count: "+level.bubbleCount+"   Checked:"+level.checked.size());
+            //System.out.println("Count: "+level.bubbleCount+"   Checked:"+level.checked.size());
             if(level.checked.size()>2) {
                 for(Bubble ba : level.checked) {
-                    System.out.println("First Removed  row:"+ba.row+"   col:"+ba.col);
+                    //System.out.println("First Removed  row:"+ba.row+"   col:"+ba.col);
                     level.bubbles[ba.row][ba.col] = null;
                     //level.entities.remove(ba);
                     //ba.toRemove = true;
                     ba.falling = true;
-                    System.out.println("Current entities:"+level.entities.size());
+                    //System.out.println("Current entities:"+level.entities.size());
                 }
                 level.toUpdateBubbles = 1;
             }
@@ -126,7 +126,7 @@ public abstract class Entity {
             for(Bubble b : nearBubbles) {
                 if (Math.sqrt(((tempX+32)-(b.x+32))*((tempX+32)-(b.x+32))+((tempY+32)-(b.y+32))*((tempY+32)-(b.y+32)))<(30+30)) {
                     if(!positionSetted) {
-                        System.out.println("collide with: "+b+"  at row:"+b.row+"   col:"+b.col);
+                        //System.out.println("collide with: "+b+"  at row:"+b.row+"   col:"+b.col);
                         velocity.x = 0;
                         velocity.y = 0;
                         int row = (int) ((750-(tempY+32)) / 54);
@@ -134,7 +134,7 @@ public abstract class Entity {
                         int col = (int)(((tempX+32) / 64) * 2);
                         double dec = (((tempX+32) / 64)-((int)((tempX+32) / 64)));
                         double fris =  ((tempX+32) / 64);
-                        System.out.println("BEFORE be at row:"+row+"  col:"+col+"   x:"+tempX+"   y:"+tempY+"    dec:"+dec+"   fRis:"+fris);
+                        //System.out.println("BEFORE be at row:"+row+"  col:"+col+"   x:"+tempX+"   y:"+tempY+"    dec:"+dec+"   fRis:"+fris);
                         y = 750-level.yRows[row];
                         if(row%2==0) {
                             if(col%2==1) {
@@ -155,7 +155,7 @@ public abstract class Entity {
                         ((Bubble)this).row = row;
                         ((Bubble)this).col = col;
                         level.bubbles[row][col] =  (Bubble)this;
-                        System.out.println("AFTER be at row:"+row+"  col:"+col+"   x:"+tempX+"   y:"+tempY);
+                        //System.out.println("AFTER be at row:"+row+"  col:"+col+"   x:"+tempX+"   y:"+tempY);
                         positionSetted = true;
                         level.arrow.nextShoot = 0;
 
@@ -163,22 +163,22 @@ public abstract class Entity {
                         level.bubbleCount = 0;
 
                         ArrayList<Bubble> around = giveAround(level, row, col);
-                        System.out.println("Around to row:"+row+"  col:"+col+": "+around.size());
+                        //System.out.println("Around to row:"+row+"  col:"+col+": "+around.size());
                         addToCheckedList(level, (Bubble) this);
                         level.bubbleCount++;
                         //System.out.println("ADDED TO LIST row:"+row+"  col:"+col);
                         for(Bubble be : around) {
                             be.exp(level, false);
                         }
-                        System.out.println("Count: "+level.bubbleCount+"   Checked:"+level.checked.size());
+                        //System.out.println("Count: "+level.bubbleCount+"   Checked:"+level.checked.size());
                         if(level.checked.size()>2) {
                             for(Bubble ba : level.checked) {
-                                System.out.println("Second Removed  row:"+ba.row+"   col:"+ba.col);
+                                //System.out.println("Second Removed  row:"+ba.row+"   col:"+ba.col);
                                 level.bubbles[ba.row][ba.col] = null;
                                 //level.entities.remove(ba);
                                 //ba.toRemove = true;
                                 ba.falling = true;
-                                System.out.println("Current entities:"+level.entities.size());
+                                //System.out.println("Current entities:"+level.entities.size());
                             }
                             level.toUpdateBubbles = 1;
                         }
@@ -202,7 +202,7 @@ public abstract class Entity {
 
     public void exp(Level level, boolean allColors) {
         level.bubbleCount++;
-        System.out.println("Exploding row:"+((Bubble)this).row+"   col:"+((Bubble)this).col);
+        //System.out.println("Exploding row:"+((Bubble)this).row+"   col:"+((Bubble)this).col);
         addToCheckedList(level, (Bubble) this);
         //System.out.println("ADDED 2 row:"+((Bubble)this).row+"  col:"+((Bubble)this).col);
 
@@ -247,7 +247,7 @@ public abstract class Entity {
     private void addToCheckedList(Level level, Bubble b) {
         if(!level.checked.contains(b)) {
             level.checked.add(b);
-            System.out.println("Added to checked list  row:"+b.row+"   col:"+b.col);
+            //System.out.println("Added to checked list  row:"+b.row+"   col:"+b.col);
         }
     }
 
@@ -257,6 +257,7 @@ public abstract class Entity {
             //System.out.println("CHECKED item  row:"+be.row+"  col:"+be.col);
         //}
         if(r<=11 && r>=0 && c>=0 && c<13 && level.bubbles[r][c]!=null) {
+            /*
             boolean found = false;
             for(Bubble b : level.checked) {
                 //System.out.println("comparing row:"+b.row+"  col:"+b.col);
@@ -268,20 +269,23 @@ public abstract class Entity {
             }
             if(!found) return true;
             else return false;
+            */
+            if(level.checked.contains(level.bubbles[r][c])) return false;
+            else return true;
         }
         else return false;
     }
 
     public boolean reachFirstRow(Level level) {
         level.checked.clear();
-        System.out.println("CHECKING FALLING FOR BUBBLE "+((Bubble)this).color+"  row:"+((Bubble)this).row+"  col:"+((Bubble)this).col);
+        //System.out.println("CHECKING FALLING FOR BUBBLE "+((Bubble)this).color+"  row:"+((Bubble)this).row+"  col:"+((Bubble)this).col);
         ArrayList<Bubble> around = giveAroundAllColors(level, ((Bubble)this).row, ((Bubble)this).col);
         addToCheckedList(level, (Bubble) this);
         for(Bubble be : around) {
             be.exp(level, true);
         }
         for(Bubble b : level.checked) {
-            System.out.println("Checked row:"+b.row+"  col:"+b.col+"   for bubble r:"+((Bubble)this).row+"  c:"+((Bubble)this).col);
+            //System.out.println("Checked row:"+b.row+"  col:"+b.col+"   for bubble r:"+((Bubble)this).row+"  c:"+((Bubble)this).col);
             if(b.row==0) {
                 return true;
             }

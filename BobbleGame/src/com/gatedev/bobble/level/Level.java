@@ -49,20 +49,23 @@ public class Level {
 
     public void tickEntities() {
         //System.out.println("LEVEL Current entities:"+entities.size());
+        //long beforeTime = System.nanoTime();
         for(int i=0; i<entities.size(); i++) {
             if(!entities.get(i).toRemove) {
                 entities.get(i).tick(this);
             }
             if(entities.get(i).toRemove) {
-                System.out.println("REMOVED DEFINITELY "+i+"     "+entities.get(i));
+                //System.out.println("REMOVED DEFINITELY "+i+"     "+entities.get(i));
                 entities.remove(i);
             }
         }
+        //System.out.println("TimeToTick: "+(System.nanoTime()-beforeTime));
         if(toUpdateBubbles==2) {
-            System.out.println("FINISHED TICKING ENTITIES "+entities.size()+"   First entity:"+entities.get(0));
+            long beforeTime = System.currentTimeMillis();
+            //System.out.println("FINISHED TICKING ENTITIES "+entities.size()+"   First entity:"+entities.get(0));
             for(int i=0; i<entities.size(); i++) {
                 if(entities.get(i) instanceof Bubble) {
-                    System.out.println("Index:"+i+"   CALLING CHECK FALLING FOR BUBBLE "+((Bubble)entities.get(i)).color+"  row:"+((Bubble)entities.get(i)).row+"  col:"+((Bubble)entities.get(i)).col);
+                    //System.out.println("Index:"+i+"   CALLING CHECK FALLING FOR BUBBLE "+((Bubble)entities.get(i)).color+"  row:"+((Bubble)entities.get(i)).row+"  col:"+((Bubble)entities.get(i)).col);
                     Bubble b = (Bubble)entities.get(i);
                     if(!b.reachFirstRow(this)) {
                         bubbles[b.row][b.col] = null;
@@ -71,6 +74,7 @@ public class Level {
                     }
                 }
             }
+            System.out.println("TimeToUPDATE: "+(System.currentTimeMillis()-beforeTime));
             toUpdateBubbles = 0;
         }
         if(toUpdateBubbles==1) toUpdateBubbles = 2;
