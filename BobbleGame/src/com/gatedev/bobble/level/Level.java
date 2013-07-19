@@ -85,7 +85,7 @@ public class Level {
     public ArrayList<Bubble> getNearBubbles(Entity e) {
         ArrayList<Bubble> nearBubbles = new ArrayList<Bubble>();
         for(Entity k : entities) {
-            if(k instanceof Bubble && k!=e) {
+            if(k instanceof Bubble && k!=e && !k.falling) {
                 nearBubbles.add((Bubble)k);
             }
         }
