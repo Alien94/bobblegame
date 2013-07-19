@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.gatedev.bobble.level.Level;
+import com.gatedev.bobble.screen.GameScreen;
 import com.gatedev.bobble.utils.OverlapTester;
 
 import java.util.ArrayList;
@@ -20,9 +21,9 @@ public abstract class Entity {
     public int width;
     public int height;
     public Vector2 velocity = new Vector2(0, 0);
-    public boolean toRemove = false;
     public boolean positionSetted = false;
-    private ArrayList<Bubble> checked = new ArrayList<Bubble>();
+    public boolean falling = false;
+    public boolean toRemove = false;
 
     public Entity(float x, float y) {
         this.x = x;
@@ -74,6 +75,31 @@ public abstract class Entity {
             positionSetted = true;
             level.arrow.nextShoot = 0;
 
+            level.checked.clear();
+            level.bubbleCount = 0;
+
+            ArrayList<Bubble> around = giveAround(level, row, col);
+            System.out.println("Around to row:"+row+"  col:"+col+": "+around.size());
+            addToCheckedList(level, (Bubble) this);
+            level.bubbleCount++;
+            //System.out.println("ADDED TO LIST row:"+row+"  col:"+col);
+            for(Bubble be : around) {
+                //System.out.println("Main explode");
+                be.exp(level, false);
+            }
+            System.out.println("Count: "+level.bubbleCount+"   Checked:"+level.checked.size());
+            if(level.checked.size()>2) {
+                for(Bubble ba : level.checked) {
+                    System.out.println("First Removed  row:"+ba.row+"   col:"+ba.col);
+                    level.bubbles[ba.row][ba.col] = null;
+                    //level.entities.remove(ba);
+                    //ba.toRemove = true;
+                    ba.falling = true;
+                    System.out.println("Current entities:"+level.entities.size());
+                }
+                level.toUpdateBubbles = 1;
+            }
+
         }
 
         if(tempX+width>448) {
@@ -90,7 +116,12 @@ public abstract class Entity {
             velocity.x = -velocity.x;
         }
 
-        if(this instanceof Bubble) {
+        if(falling) {
+            velocity.y -= 0.8f;
+            if(y<0) toRemove = true;
+        }
+
+        if(!falling && this instanceof Bubble) {
             ArrayList<Bubble> nearBubbles = level.getNearBubbles(this);
             for(Bubble b : nearBubbles) {
                 if (Math.sqrt(((tempX+32)-(b.x+32))*((tempX+32)-(b.x+32))+((tempY+32)-(b.y+32))*((tempY+32)-(b.y+32)))<(30+30)) {
@@ -119,7 +150,6 @@ public abstract class Entity {
                             if(col==12) col = 11;
                             else if(col==13) col = 11;
                             else if(col==-1) col = 1;
-                            //errore index -1
                             x=level.xCols[col];
                         }
                         ((Bubble)this).row = row;
@@ -129,30 +159,29 @@ public abstract class Entity {
                         positionSetted = true;
                         level.arrow.nextShoot = 0;
 
-                        checked.clear();
+                        level.checked.clear();
+                        level.bubbleCount = 0;
 
-                        /*
-                        ArrayList<Bubble> around = new ArrayList<Bubble>();
-                        addToList(level, around, row+1, col-1);
-                        addToList(level, around, row+1, col+1);
-                        addToList(level, around, row, col-2);
-                        addToList(level, around, row, col+2);
-                        addToList(level, around, row-1, col-1);
-                        addToList(level, around, row-1, col+1);
-                        System.out.println("Bubbles around: "+around.size());
-                        */
-
-                        int count = explode(level, row, col);
-                        for(Bubble ba : checked) {
-                            System.out.println("Bubble  row:"+ba.row+"   col:"+ba.col);
+                        ArrayList<Bubble> around = giveAround(level, row, col);
+                        System.out.println("Around to row:"+row+"  col:"+col+": "+around.size());
+                        addToCheckedList(level, (Bubble) this);
+                        level.bubbleCount++;
+                        //System.out.println("ADDED TO LIST row:"+row+"  col:"+col);
+                        for(Bubble be : around) {
+                            be.exp(level, false);
                         }
-                        if(count>2) {
-                            for(Bubble ba : checked) {
+                        System.out.println("Count: "+level.bubbleCount+"   Checked:"+level.checked.size());
+                        if(level.checked.size()>2) {
+                            for(Bubble ba : level.checked) {
+                                System.out.println("Second Removed  row:"+ba.row+"   col:"+ba.col);
                                 level.bubbles[ba.row][ba.col] = null;
-                                level.entities.remove(ba);
+                                //level.entities.remove(ba);
+                                //ba.toRemove = true;
+                                ba.falling = true;
+                                System.out.println("Current entities:"+level.entities.size());
                             }
+                            level.toUpdateBubbles = 1;
                         }
-                        System.out.println("Explode: "+count);
 
                         if(row>=10 && (col>=4 && col<=8)) {
                             System.out.println("DIED!");
@@ -171,143 +200,93 @@ public abstract class Entity {
         }
     }
 
+    public void exp(Level level, boolean allColors) {
+        level.bubbleCount++;
+        System.out.println("Exploding row:"+((Bubble)this).row+"   col:"+((Bubble)this).col);
+        addToCheckedList(level, (Bubble) this);
+        //System.out.println("ADDED 2 row:"+((Bubble)this).row+"  col:"+((Bubble)this).col);
+
+        ArrayList<Bubble> around = new ArrayList<Bubble>();
+        if(!allColors) around = giveAround(level, ((Bubble)this).row, ((Bubble)this).col);
+        else around = giveAroundAllColors(level, ((Bubble)this).row, ((Bubble)this).col);
+
+        /*
+        for(Bubble be : around) {
+            System.out.println("Around item  row:"+be.row+"  col:"+be.col);
+        }
+        */
+        for(Bubble be : around) {
+            be.exp(level, allColors);
+        }
+    }
+
+    private ArrayList<Bubble> giveAround(Level level, int row, int col) {
+        ArrayList<Bubble> around = new ArrayList<Bubble>();
+        if(isValid(level, row+1, col-1) && level.bubbles[row+1][col-1].color==((Bubble)this).color) around.add(level.bubbles[row+1][col-1]);
+        if(isValid(level, row+1, col+1) && level.bubbles[row+1][col+1].color==((Bubble)this).color) around.add(level.bubbles[row+1][col+1]);
+        if(isValid(level, row, col-2) && level.bubbles[row][col-2].color==((Bubble)this).color) around.add(level.bubbles[row][col-2]);
+        if(isValid(level, row, col+2) && level.bubbles[row][col+2].color==((Bubble)this).color) around.add(level.bubbles[row][col+2]);
+        if(isValid(level, row-1, col-1) && level.bubbles[row-1][col-1].color==((Bubble)this).color ) around.add(level.bubbles[row-1][col-1]);
+        if(isValid(level, row-1, col+1) && level.bubbles[row-1][col+1].color==((Bubble)this).color) around.add(level.bubbles[row-1][col+1]);
+        //System.out.println("Give around for row:"+row+"  col:"+col+"   size:"+around.size());
+        return around;
+    }
+
+    private ArrayList<Bubble> giveAroundAllColors(Level level, int row, int col) {
+        ArrayList<Bubble> around = new ArrayList<Bubble>();
+        if(isValid(level, row+1, col-1)) around.add(level.bubbles[row+1][col-1]);
+        if(isValid(level, row+1, col+1)) around.add(level.bubbles[row+1][col+1]);
+        if(isValid(level, row, col-2)) around.add(level.bubbles[row][col-2]);
+        if(isValid(level, row, col+2)) around.add(level.bubbles[row][col+2]);
+        if(isValid(level, row-1, col-1)) around.add(level.bubbles[row-1][col-1]);
+        if(isValid(level, row-1, col+1)) around.add(level.bubbles[row-1][col+1]);
+        //System.out.println("Give around for row:"+row+"  col:"+col+"   size:"+around.size());
+        return around;
+    }
+
+    private void addToCheckedList(Level level, Bubble b) {
+        if(!level.checked.contains(b)) {
+            level.checked.add(b);
+            System.out.println("Added to checked list  row:"+b.row+"   col:"+b.col);
+        }
+    }
+
     private boolean isValid(Level level, int r, int c) {
+        //System.out.println("is valid?? row:"+r+"  col:"+c);
+        //for(Bubble be : checked) {
+            //System.out.println("CHECKED item  row:"+be.row+"  col:"+be.col);
+        //}
         if(r<=11 && r>=0 && c>=0 && c<13 && level.bubbles[r][c]!=null) {
-            return true;
+            boolean found = false;
+            for(Bubble b : level.checked) {
+                //System.out.println("comparing row:"+b.row+"  col:"+b.col);
+                if(level.bubbles[r][c].row==b.row && level.bubbles[r][c].col==b.col) {
+                    found = true;
+                    //System.out.println("found row:"+r+"  col:"+c);
+                    break;
+                }
+            }
+            if(!found) return true;
+            else return false;
         }
         else return false;
     }
 
-    private int explode(Level level, int r, int c) {
-        System.out.println("Exploding row:"+(r)+"  col:"+(c)+"  color:"+level.bubbles[r][c].color);
-
-        int count = 0;
-        boolean found = false;
-
-        if(isValid(level, r+1, c-1)) {
-            for(Bubble b:checked) {
-                if(level.bubbles[r+1][c-1]==b) {
-                    found = true;
-                    break;
-                }
-            }
-            if(!found) {
-                if(level.bubbles[r+1][c-1].color == ((Bubble)this).color) {
-                    count = explode(level, r+1, c-1);
-                    count++;
-                    System.out.println("1 Count: "+count);
-                    return count;
-                }
+    public boolean reachFirstRow(Level level) {
+        level.checked.clear();
+        System.out.println("CHECKING FALLING FOR BUBBLE "+((Bubble)this).color+"  row:"+((Bubble)this).row+"  col:"+((Bubble)this).col);
+        ArrayList<Bubble> around = giveAroundAllColors(level, ((Bubble)this).row, ((Bubble)this).col);
+        addToCheckedList(level, (Bubble) this);
+        for(Bubble be : around) {
+            be.exp(level, true);
+        }
+        for(Bubble b : level.checked) {
+            System.out.println("Checked row:"+b.row+"  col:"+b.col+"   for bubble r:"+((Bubble)this).row+"  c:"+((Bubble)this).col);
+            if(b.row==0) {
+                return true;
             }
         }
-
-        if(isValid(level, r+1, c+1)) {
-            found = false;
-            for(Bubble b:checked) {
-                if(level.bubbles[r+1][c+1]==b) {
-                    found = true;
-                    break;
-                }
-            }
-            if(!found) {
-                if(level.bubbles[r+1][c+1].color == ((Bubble)this).color) {
-                    checked.add(level.bubbles[r][c]);
-                    count = explode(level, r+1, c+1);
-                    count++;
-                    System.out.println("2 Count: "+count);
-                    return count;
-                }
-            }
-        }
-
-        if(isValid(level, r, c-2)) {
-            found = false;
-            for(Bubble b:checked) {
-                if(level.bubbles[r][c-2]==b) {
-                    found = true;
-                    break;
-                }
-            }
-            if(!found) {
-                if(level.bubbles[r][c-2].color == ((Bubble)this).color) {
-                    checked.add(level.bubbles[r][c]);
-                    count = explode(level, r, c-2);
-                    count++;
-                    System.out.println("3 Count: "+count+"   analyzing row:"+r+"  col:"+c);
-                    return count;
-                }
-            }
-        }
-
-        if(isValid(level, r, c+2)) {
-            System.out.println("Valid max row:"+(r)+"  col:"+(c+2)+"  color:"+level.bubbles[r][c+2].color);
-            found = false;
-            for(Bubble b:checked) {
-                if(level.bubbles[r][c+2]==b) {
-                    found = true;
-                    break;
-                }
-            }
-            if(!found) {
-                if(level.bubbles[r][c+2].color == ((Bubble)this).color) {
-                    checked.add(level.bubbles[r][c]);
-                    count = explode(level, r, c+2);
-                    count++;
-                    System.out.println("4 Count: "+count);
-                    return count;
-                }
-            }
-        }
-
-        if(isValid(level, r-1, c-1)) {
-            System.out.println("Valid min row:"+(r-1)+"  col:"+(c-1)+"  color:"+level.bubbles[r-1][c-1].color);
-            found = false;
-            for(Bubble b:checked) {
-                if(level.bubbles[r-1][c-1]==b) {
-                    found = true;
-                    break;
-                }
-            }
-            if(!found) {
-                if(level.bubbles[r-1][c-1].color == ((Bubble)this).color) {
-                    checked.add(level.bubbles[r][c]);
-                    count = explode(level, r-1, c-1);
-                    count++;
-                    System.out.println("5 Count: "+count);
-                    return count;
-                }
-            }
-        }
-
-        if(isValid(level, r-1, c+1)) {
-            System.out.println("Valid max row:"+(r-1)+"  col:"+(c+1)+"  color:"+level.bubbles[r-1][c+1].color);
-            found = false;
-            for(Bubble b:checked) {
-                if(level.bubbles[r-1][c+1]==b) {
-                    found = true;
-                    break;
-                }
-            }
-            if(!found) {
-                if(level.bubbles[r-1][c+1].color == ((Bubble)this).color) {
-                    checked.add(level.bubbles[r][c]);
-                    count = explode(level, r-1, c+1);
-                    count++;
-                    System.out.println("6 Count: "+count);
-                    return count;
-                }
-            }
-        }
-
-        checked.add(level.bubbles[r][c]);
-
-        return 1;
-    }
-
-    private void addToList(Level level, ArrayList<Bubble> list, int r, int c) {
-        if(r<=11 && r>=0 && c>=0 && c<13) {
-            if(level.bubbles[r][c]!=null) list.add(level.bubbles[r][c]);
-        }
+        return false;
     }
 
     public abstract void render(SpriteBatch batch);

@@ -20,9 +20,13 @@ import java.util.ArrayList;
 public class Level {
     public GameScreen game;
     public ArrayList<Entity> entities = new ArrayList<Entity>();
+    public ArrayList<Bubble> checked = new ArrayList<Bubble>();
+    public int bubbleCount = 0;
     public int[] xCols, yRows;
     public Bubble[][] bubbles;
     public Arrow arrow;
+
+    public int toUpdateBubbles = 0;
 
     public Level(GameScreen game) {
         this.game = game;
@@ -32,6 +36,11 @@ public class Level {
         yRows = new int[] {64, 118, 172, 226, 280, 334, 388, 442, 498, 552, 606, 660};
         bubbles = new Bubble[12][13];
         loadMap();
+        System.out.println("Starting entities:"+entities.size());
+        for(int i=0; i<entities.size(); i++) {
+            if(entities.get(i) instanceof Bubble) System.out.println("Index:"+i+"   entity:"+entities.get(i)+"   row:"+((Bubble)entities.get(i)).row+"   col:"+((Bubble)entities.get(i)).col);
+            else System.out.println("Index:"+i+"   entity:"+entities.get(i));
+        }
     }
 
     public void tick() {
@@ -39,9 +48,32 @@ public class Level {
     }
 
     public void tickEntities() {
+        //System.out.println("LEVEL Current entities:"+entities.size());
         for(int i=0; i<entities.size(); i++) {
-            entities.get(i).tick(this);
+            if(!entities.get(i).toRemove) {
+                entities.get(i).tick(this);
+            }
+            if(entities.get(i).toRemove) {
+                System.out.println("REMOVED DEFINITELY "+i+"     "+entities.get(i));
+                entities.remove(i);
+            }
         }
+        if(toUpdateBubbles==2) {
+            System.out.println("FINISHED TICKING ENTITIES "+entities.size()+"   First entity:"+entities.get(0));
+            for(int i=0; i<entities.size(); i++) {
+                if(entities.get(i) instanceof Bubble) {
+                    System.out.println("Index:"+i+"   CALLING CHECK FALLING FOR BUBBLE "+((Bubble)entities.get(i)).color+"  row:"+((Bubble)entities.get(i)).row+"  col:"+((Bubble)entities.get(i)).col);
+                    Bubble b = (Bubble)entities.get(i);
+                    if(!b.reachFirstRow(this)) {
+                        bubbles[b.row][b.col] = null;
+                        //entities.get(i).toRemove = true;
+                        entities.get(i).falling = true;
+                    }
+                }
+            }
+            toUpdateBubbles = 0;
+        }
+        if(toUpdateBubbles==1) toUpdateBubbles = 2;
     }
 
     public void renderEntities(SpriteBatch batch) {
@@ -81,21 +113,21 @@ public class Level {
                 y = 750-yRows[j];
                 if(color.equals("ffff00ff")) {
                     addBubble(x, y, j, i, Assets.yellowBubble, GameScreen.color.YELLOW);
-                    System.out.println("Added yellow bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
+                    //System.out.println("Added yellow bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
                 }
                 else if(color.equals("ff0000ff")) {
                     addBubble(x, y, j, i, Assets.redBubble, GameScreen.color.RED);
-                    System.out.println("Added red bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
+                    //System.out.println("Added red bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
                 }
                 else if(color.equals("ff00ff")) {
                     addBubble(x, y, j, i, Assets.greenBubble, GameScreen.color.GREEN);
-                    System.out.println("Added green bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
+                    //System.out.println("Added green bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
                 }
                 else if(color.equals("ffff")) {
                     addBubble(x, y, j, i, Assets.blueBubble, GameScreen.color.BLUE);
-                    System.out.println("Added blue bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
+                    //System.out.println("Added blue bubble Row:"+j+"("+y+")  col:"+i+" ("+x+")   "+color);
                 }
-                else System.out.println("Row:"+j+"  col:"+i+"   "+color);
+                //else System.out.println("Row:"+j+"  col:"+i+"   "+color);
             }
         }
     }

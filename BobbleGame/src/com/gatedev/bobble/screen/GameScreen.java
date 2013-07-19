@@ -41,6 +41,7 @@ public class GameScreen implements Screen {
     private int lastSecondTime = (int) (lastUpdateTime / 1000000000);
     private long lastTimer1 = System.currentTimeMillis();
     private int frames = 0;
+    public static int count = 0;
 
     public GameScreen(Game game) {
         this.game = game;
