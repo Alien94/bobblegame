@@ -9,6 +9,9 @@ import com.gatedev.bobble.input.Controls;
 import com.gatedev.bobble.input.Keyboard;
 import com.gatedev.bobble.input.KeyboardHandler;
 import com.gatedev.bobble.level.Level;
+import com.gatedev.bobble.network.*;
+import com.gatedev.bobble.network.packet.ChangeKeyCommand;
+import com.gatedev.bobble.network.packet.StartGamePacket;
 
 import java.util.Random;
 
@@ -17,18 +20,22 @@ import java.util.Random;
  * Date: 15/07/13
  * Time: 15.35
  */
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, CommandListener, PacketListener {
 
     public Game game;
     public Level level;
     public Renderer renderer;
     public Controls controls;
     public Keyboard keyboard = new Keyboard();
+    public Keyboard[] synchKeyboard = {new Keyboard(), new Keyboard()};
+    public Synchronizer synchronizer;
+    private PacketLink packetLink;
     public static Random random;
 
     public static enum color {RED, YELLOW, BLUE, GREEN};
-
     public static boolean pause = false;
+    private int createServer = 0, createClient = 0, localId = 0, stalloTime = 0;
+    private boolean multiplayer, isServer;
 
     public int curFps;
     private final int UPD = 60;
@@ -41,10 +48,24 @@ public class GameScreen implements Screen {
     private int lastSecondTime = (int) (lastUpdateTime / 1000000000);
     private long lastTimer1 = System.currentTimeMillis();
     private int frames = 0;
-    public static int count = 0;
 
     public GameScreen(Game game) {
         this.game = game;
+        GameScreen.random = new Random();
+        this.renderer = new Renderer(this);
+        synchronizer = new Synchronizer(this, null, 0, 1);
+        synchronizer.setStarted(true);
+        loadLevel();
+        this.controls = new Controls(keyboard);
+        Gdx.input.setInputProcessor(new KeyboardHandler(keyboard, level.arrow));
+        //level.entities.add(new Bubble(100, 100));
+    }
+
+    public GameScreen(Game game, PacketLink networking, boolean isServer) {
+        this.game = game;
+        this.multiplayer = true;
+        this.isServer = isServer;
+        this.packetLink = networking;
         GameScreen.random = new Random();
         this.renderer = new Renderer(this);
         this.level = new Level(this);
@@ -60,9 +81,53 @@ public class GameScreen implements Screen {
             curFps = frames;
             frames = 0;
         }
+
+        if(multiplayer) {
+            if(createServer==1) {
+                synchronizer = new Synchronizer(this, packetLink, localId, 2);
+                loadLevel();
+                packetLink.sendPacket(new StartGamePacket(Synchronizer.startGameSeed));
+                packetLink.setPacketListener(this);
+                synchronizer.setStarted(true);
+                createServer = 2;
+            }
+            else if(createClient==1) {
+                synchronizer = new Synchronizer(this, packetLink, localId, 2);
+                packetLink.setPacketListener(this);
+                createClient = 2;
+            }
+        }
+        if (packetLink != null) {
+            packetLink.tick();
+        }
+
+        if (synchronizer.preTurn()) {
+            if(stalloTime>0) stalloTime=0;
+            synchronizer.postTurn();
+            for (int index = 0; index < keyboard.getAll().size(); index++) {
+                boolean nextState = keyboard.getAll().get(index).nextState;
+                if (keyboard.getAll().get(index).isPressed != nextState) {
+                    synchronizer.addCommand(new ChangeKeyCommand(index, nextState));
+                }
+            }
+            keyboard.tick();
+            for (Keyboard skeys : synchKeyboard) {
+                skeys.tick();
+            }
+            controls.tick();
+            level.tick();
+        } else {
+            stalloTime++;
+            if(stalloTime>3000) {
+                //MAIN MENU
+            }
+        }
+
+        /*
         keyboard.tick();
         controls.tick();
         level.tick();
+        */
     }
 
     @Override
@@ -96,6 +161,20 @@ public class GameScreen implements Screen {
             } catch(Exception e) {}
             now = System.nanoTime();
         }
+    }
+
+    private void loadLevel() {
+        this.level = new Level(this);
+    }
+
+    @Override
+    public void handle(int playerId, NetworkCommand packet) {
+
+    }
+
+    @Override
+    public void handle(Packet packet) {
+
     }
 
     @Override

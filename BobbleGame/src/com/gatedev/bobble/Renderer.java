@@ -19,8 +19,8 @@ public class Renderer {
 	public BitmapFont font_stroke;
 	
 	public Renderer(GameScreen game) {
-        camera = new OrthographicCamera(480, 800);
-		guiCamera = new OrthographicCamera(480, 800);
+        camera = new OrthographicCamera(960, 800);
+		guiCamera = new OrthographicCamera(960, 800);
 		batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 		this.game = game;
@@ -30,7 +30,7 @@ public class Renderer {
 		font = new BitmapFont(Gdx.files.internal("data/fonts/harabara.fnt"), Gdx.files.internal("data/fonts/harabara.png"), false);
 		font.setScale(0.6f);
 		Vector3 position = camera.position;
-		position.x += 240;
+		position.x += 480;
 		position.y += 400;
 	}
 
