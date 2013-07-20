@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BobbleGame-desktop:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BobbleGame_desktop_jar</output-path>
+    <root id="archive" name="BobbleGame-desktop.jar">
+      <element id="module-output" name="BobbleGame-desktop" />
+      <element id="module-output" name="BobbleGame" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../BobbleGame-desktop/libs/gdx-natives.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/gdx.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../BobbleGame-desktop/libs/gdx-backend-lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../BobbleGame-desktop/libs/gdx-backend-lwjgl-natives.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

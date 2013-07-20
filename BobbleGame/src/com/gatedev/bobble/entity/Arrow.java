@@ -34,10 +34,6 @@ public class Arrow extends Entity {
         }
 
         if(keyboard.shoot.isPressed && nextShoot==0) {
-            //Bubble bubble = new Bubble(x+28, y, Assets.yellowBubble);
-            //bubble.velocity.x = (float)Math.cos(Math.toRadians(degrees)) * bubbleVelocity;
-            //bubble.velocity.y = (float)Math.sin(Math.toRadians(degrees)) * bubbleVelocity;
-            //level.entities.add(bubble);
             next.velocity.x = (float)Math.cos(Math.toRadians(degrees)) * bubbleVelocity;
             next.velocity.y = (float)Math.sin(Math.toRadians(degrees)) * bubbleVelocity;
             level.entities.add(next);
@@ -49,10 +45,18 @@ public class Arrow extends Entity {
 
     private void createNextBubble() {
         int nextColor = GameScreen.random.nextInt(4);
+<<<<<<< HEAD
         if(nextColor==0) next = new Bubble(x+28, y, Assets.yellowBubble);
         else if(nextColor==1) next = new Bubble(x+28, y, Assets.blueBubble);
         else if(nextColor==2) next = new Bubble(x+28, y, Assets.redBubble);
         else if(nextColor==3) next = new Bubble(x+28, y, Assets.greenBubble);
+=======
+        //int nextColor = 1;
+        if(nextColor==0) next = new Bubble(x+28, y, Assets.yellowBubble, GameScreen.color.YELLOW);
+        else if(nextColor==1) next = new Bubble(x+28, y, Assets.blueBubble, GameScreen.color.BLUE);
+        else if(nextColor==2) next = new Bubble(x+28, y, Assets.redBubble, GameScreen.color.RED);
+        else if(nextColor==3) next = new Bubble(x+28, y, Assets.greenBubble, GameScreen.color.GREEN);
+>>>>>>> origin/gian
     }
 
     public void setDegrees(int angle) {
